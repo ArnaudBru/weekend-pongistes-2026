@@ -29,20 +29,20 @@
 :root {
   color-scheme: light;
 
-  --background: oklch(0.13 0.012 270);
-  --foreground: oklch(0.93 0.01 80);
+  --background: oklch(0.20 0.010 270);
+  --foreground: oklch(0.97 0.005 80);
 
-  --card: oklch(0.18 0.015 270);
-  --card-foreground: oklch(0.93 0.01 80);
+  --card: oklch(0.26 0.012 270);
+  --card-foreground: oklch(0.97 0.005 80);
 
-  --primary: oklch(0.78 0.06 65);
-  --primary-foreground: oklch(0.13 0.012 270);
+  --primary: oklch(0.82 0.07 65);
+  --primary-foreground: oklch(0.20 0.010 270);
 
-  --muted: oklch(0.22 0.015 270);
-  --muted-foreground: oklch(0.52 0.02 80);
+  --muted: oklch(0.30 0.012 270);
+  --muted-foreground: oklch(0.68 0.015 80);
 
-  --border: oklch(0.26 0.015 270);
-  --ring: oklch(0.78 0.06 65);
+  --border: oklch(0.34 0.012 270);
+  --ring: oklch(0.82 0.07 65);
 
   --radius: 1rem;
 }
@@ -51,7 +51,7 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground font-sans;
+  html, body {
+    @apply bg-background text-foreground font-sans h-full overflow-hidden;
   }
 }

@@ -37,14 +37,14 @@ function Unit({ value, label, dim }: UnitProps) {
     <div className="flex flex-col items-center gap-2">
       <span
         className={`text-5xl sm:text-6xl font-bold tabular-nums leading-none transition-all duration-500 ${
-          dim ? 'text-muted-foreground/50' : 'text-foreground'
+          dim ? 'text-muted-foreground/80' : 'text-foreground'
         }`}
       >
         {pad(value)}
       </span>
       <span
         className={`text-[10px] font-semibold uppercase tracking-[0.2em] ${
-          dim ? 'text-muted-foreground/30' : 'text-muted-foreground'
+          dim ? 'text-muted-foreground/60' : 'text-muted-foreground'
         }`}
       >
         {label}
@@ -55,7 +55,7 @@ function Unit({ value, label, dim }: UnitProps) {
 
 function Separator() {
   return (
-    <span className="text-3xl sm:text-4xl font-light text-muted-foreground/30 pb-5 select-none">
+    <span className="text-3xl sm:text-4xl font-light text-muted-foreground/50 pb-5 select-none">
       ·
     </span>
   )
