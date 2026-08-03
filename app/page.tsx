@@ -2,7 +2,7 @@ import { Countdown } from '@/components/countdown'
 
 export default function Page() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-6 py-16 relative overflow-hidden">
+    <main className="h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden">
       {/* Subtle ambient glow */}
       <div
         aria-hidden="true"
