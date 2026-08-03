@@ -11,11 +11,6 @@ export default function Page() {
       />
 
       <div className="relative flex flex-col items-center gap-14 w-full max-w-md text-center">
-        {/* Eyebrow */}
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
-          Plus que
-        </p>
-
         {/* Countdown */}
         <Countdown />
 
