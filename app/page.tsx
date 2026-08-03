@@ -18,14 +18,9 @@ export default function Page() {
         <div className="w-px h-10 bg-border" aria-hidden="true" />
 
         {/* Message */}
-        <div className="flex flex-col items-center gap-3">
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight text-balance">
-            Quelque chose arrive. 🏓
-          </h1>
-          <p className="text-sm text-muted-foreground font-normal leading-relaxed text-pretty max-w-xs">
-            Les détails seront révélés en temps voulu.
-          </p>
-        </div>
+        <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight text-balance">
+          Quelque chose arrive. 🏓
+        </h1>
       </div>
     </main>
   )
