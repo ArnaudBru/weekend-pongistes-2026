@@ -29,35 +29,20 @@ function pad(n: number) {
 interface UnitProps {
   value: number
   label: string
-  dim?: boolean
 }
 
-function Unit({ value, label, dim }: UnitProps) {
+function Unit({ value, label }: UnitProps) {
   return (
     <div className="flex flex-col items-center gap-2">
-      <span
-        className={`text-5xl sm:text-6xl font-bold tabular-nums leading-none transition-all duration-500 ${
-          dim ? 'text-muted-foreground/80' : 'text-foreground'
-        }`}
-      >
-        {pad(value)}
-      </span>
-      <span
-        className={`text-[10px] font-semibold uppercase tracking-[0.2em] ${
-          dim ? 'text-muted-foreground/60' : 'text-muted-foreground'
-        }`}
-      >
+      <div className="bg-card rounded-2xl px-4 py-3 shadow-sm min-w-[72px]">
+        <span className="text-5xl sm:text-6xl font-extrabold tabular-nums leading-none text-foreground">
+          {pad(value)}
+        </span>
+      </div>
+      <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
         {label}
       </span>
     </div>
-  )
-}
-
-function Separator() {
-  return (
-    <span className="text-3xl sm:text-4xl font-light text-muted-foreground/50 pb-5 select-none">
-      ·
-    </span>
   )
 }
 
@@ -79,11 +64,11 @@ export function Countdown() {
 
   if (timeLeft === null) {
     return (
-      <div className="flex items-end gap-4 sm:gap-6 justify-center">
+      <div className="flex items-end gap-3 sm:gap-4 justify-center">
         {['J', 'H', 'M', 'S'].map((l) => (
           <div key={l} className="flex flex-col items-center gap-2">
-            <div className="w-12 h-14 rounded bg-muted/30 animate-pulse" />
-            <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/30">{l}</span>
+            <div className="w-[72px] h-[76px] rounded-2xl bg-card animate-pulse" />
+            <span className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground/50">{l}</span>
           </div>
         ))}
       </div>
@@ -92,21 +77,18 @@ export function Countdown() {
 
   if (isOver) {
     return (
-      <p className="text-xl font-semibold text-primary tracking-wide text-center">
-        C&apos;est maintenant.
+      <p className="text-2xl font-extrabold text-primary tracking-wide text-center">
+        C&apos;est parti ! 🎉
       </p>
     )
   }
 
   return (
-    <div className="flex items-end gap-4 sm:gap-6 justify-center">
+    <div className="flex items-start gap-3 sm:gap-4 justify-center">
       <Unit value={timeLeft.days} label="jours" />
-      <Separator />
-      <Unit value={timeLeft.hours} label="heures" dim />
-      <Separator />
-      <Unit value={timeLeft.minutes} label="minutes" dim />
-      <Separator />
-      <Unit value={timeLeft.seconds} label="secondes" dim />
+      <Unit value={timeLeft.hours} label="heures" />
+      <Unit value={timeLeft.minutes} label="minutes" />
+      <Unit value={timeLeft.seconds} label="secondes" />
     </div>
   )
 }

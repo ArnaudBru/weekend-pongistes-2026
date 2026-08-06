@@ -29,20 +29,22 @@
 :root {
   color-scheme: light;
 
-  --background: oklch(0.20 0.010 270);
-  --foreground: oklch(0.97 0.005 80);
+  /* Warm sandy off-white background */
+  --background: oklch(0.97 0.018 75);
+  --foreground: oklch(0.25 0.025 55);
 
-  --card: oklch(0.26 0.012 270);
-  --card-foreground: oklch(0.97 0.005 80);
+  --card: oklch(0.93 0.022 72);
+  --card-foreground: oklch(0.25 0.025 55);
 
-  --primary: oklch(0.82 0.07 65);
-  --primary-foreground: oklch(0.20 0.010 270);
+  /* Warm terracotta accent */
+  --primary: oklch(0.60 0.12 42);
+  --primary-foreground: oklch(0.98 0.005 75);
 
-  --muted: oklch(0.30 0.012 270);
-  --muted-foreground: oklch(0.68 0.015 80);
+  --muted: oklch(0.90 0.022 70);
+  --muted-foreground: oklch(0.52 0.03 55);
 
-  --border: oklch(0.34 0.012 270);
-  --ring: oklch(0.82 0.07 65);
+  --border: oklch(0.86 0.025 68);
+  --ring: oklch(0.60 0.12 42);
 
   --radius: 1rem;
 }

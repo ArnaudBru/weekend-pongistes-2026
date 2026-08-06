@@ -9,14 +9,14 @@ const _nunito = Nunito({
 })
 
 export const metadata: Metadata = {
-  title: 'Bientôt.',
-  description: 'Quelque chose arrive.',
+  title: 'Weekend Pongistes 2026',
+  description: 'Un weekend entre amis. Bientôt.',
   generator: 'v0.app',
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'dark',
-  themeColor: '#1a1a2e',
+  colorScheme: 'light',
+  themeColor: '#f7f0e4',
   width: 'device-width',
   initialScale: 1,
   userScalable: false,
