@@ -1,8 +1,13 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
+import { useRouter } from 'next/navigation'
 
 const TARGET_DATE = new Date('2026-09-27T00:00:00')
+
+// Correct sequence: heures → minutes → jours
+const SEQUENCE = ['heures', 'minutes', 'jours'] as const
+type Step = typeof SEQUENCE[number]
 
 interface TimeLeft {
   days: number
@@ -29,16 +34,27 @@ function pad(n: number) {
 interface UnitProps {
   value: number
   label: string
+  onClick?: () => void
+  active?: boolean
 }
 
-function Unit({ value, label }: UnitProps) {
+function Unit({ value, label, onClick, active }: UnitProps) {
   return (
     <div className="flex flex-col items-center gap-2">
-      <div className="bg-card rounded-2xl px-4 py-3 shadow-sm min-w-[72px]">
+      <button
+        onClick={onClick}
+        className={[
+          'bg-card rounded-2xl px-4 py-3 min-w-[72px] transition-transform duration-100',
+          onClick ? 'cursor-pointer active:scale-95' : 'cursor-default',
+          active ? 'ring-2 ring-primary ring-offset-1' : '',
+        ].join(' ')}
+        aria-label={`${label}: ${value}`}
+        type="button"
+      >
         <span className="text-5xl sm:text-6xl font-extrabold tabular-nums leading-none text-foreground">
           {pad(value)}
         </span>
-      </div>
+      </button>
       <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
         {label}
       </span>
@@ -48,12 +64,31 @@ function Unit({ value, label }: UnitProps) {
 
 export function Countdown() {
   const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null)
+  const [progress, setProgress] = useState<Step[]>([])
+  const router = useRouter()
 
   useEffect(() => {
     setTimeLeft(getTimeLeft())
     const id = setInterval(() => setTimeLeft(getTimeLeft()), 1000)
     return () => clearInterval(id)
   }, [])
+
+  const handleClick = useCallback((unit: Step) => {
+    setProgress((prev) => {
+      const expected = SEQUENCE[prev.length]
+      if (unit === expected) {
+        const next = [...prev, unit]
+        if (next.length === SEQUENCE.length) {
+          // Sequence complete — navigate after a short delay
+          setTimeout(() => router.push('/easter-egg'), 200)
+          return []
+        }
+        return next
+      }
+      // Wrong step — reset
+      return unit === SEQUENCE[0] ? [unit] : []
+    })
+  }, [router])
 
   const isOver =
     timeLeft !== null &&
@@ -78,16 +113,31 @@ export function Countdown() {
   if (isOver) {
     return (
       <p className="text-2xl font-extrabold text-primary tracking-wide text-center">
-        C&apos;est parti ! 🎉
+        {"C'est parti ! 🎉"}
       </p>
     )
   }
 
   return (
     <div className="flex items-start gap-3 sm:gap-4 justify-center">
-      <Unit value={timeLeft.days} label="jours" />
-      <Unit value={timeLeft.hours} label="heures" />
-      <Unit value={timeLeft.minutes} label="minutes" />
+      <Unit
+        value={timeLeft.days}
+        label="jours"
+        onClick={() => handleClick('jours')}
+        active={progress.includes('jours')}
+      />
+      <Unit
+        value={timeLeft.hours}
+        label="heures"
+        onClick={() => handleClick('heures')}
+        active={progress.includes('heures')}
+      />
+      <Unit
+        value={timeLeft.minutes}
+        label="minutes"
+        onClick={() => handleClick('minutes')}
+        active={progress.includes('minutes')}
+      />
       <Unit value={timeLeft.seconds} label="secondes" />
     </div>
   )
