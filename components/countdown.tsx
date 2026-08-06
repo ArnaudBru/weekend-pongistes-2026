@@ -73,7 +73,7 @@ export function Countdown() {
         const next = [...prev, unit]
         if (next.length === SEQUENCE.length) {
           // Sequence complete — navigate after a short delay
-          setTimeout(() => router.push('/easter-egg'), 200)
+          setTimeout(() => router.push('/hidden'), 200)
           return []
         }
         return next
