@@ -17,7 +17,7 @@ export default function Page() {
             Un weekend entre amis 🏓
           </h1>
           <p className="text-base text-muted-foreground font-medium">
-            Les premières infos arrivent...
+            Les premières infos arrivent dans
           </p>
         </div>
 
