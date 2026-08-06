@@ -1,18 +1,12 @@
 import Link from 'next/link'
 import { HeroSection } from '@/components/sections/hero-section'
-import { LocationSection } from '@/components/sections/location-section'
-import { ScheduleSection } from '@/components/sections/schedule-section'
-import { PackingSection } from '@/components/sections/packing-section'
-import { GallerySection } from '@/components/sections/gallery-section'
+import { QuickLinks } from '@/components/sections/quick-links'
 
 export default function HiddenPage() {
   return (
-    <main className="min-h-screen flex flex-col divide-y divide-border">
+    <>
       <HeroSection />
-      <LocationSection />
-      <ScheduleSection />
-      <PackingSection />
-      <GallerySection />
+      <QuickLinks />
       <footer className="flex justify-center py-10">
         <Link
           href="/"
@@ -21,6 +15,6 @@ export default function HiddenPage() {
           Retour au compte à rebours
         </Link>
       </footer>
-    </main>
+    </>
   )
 }
