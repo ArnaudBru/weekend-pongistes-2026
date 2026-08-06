@@ -35,26 +35,19 @@ interface UnitProps {
   value: number
   label: string
   onClick?: () => void
-  active?: boolean
 }
 
-function Unit({ value, label, onClick, active }: UnitProps) {
+function Unit({ value, label, onClick }: UnitProps) {
   return (
     <div className="flex flex-col items-center gap-2">
-      <button
+      <div
         onClick={onClick}
-        className={[
-          'bg-card rounded-2xl px-4 py-3 min-w-[72px] transition-transform duration-100',
-          onClick ? 'cursor-pointer active:scale-95' : 'cursor-default',
-          active ? 'ring-2 ring-primary ring-offset-1' : '',
-        ].join(' ')}
-        aria-label={`${label}: ${value}`}
-        type="button"
+        className="bg-card rounded-2xl px-4 py-3 min-w-[72px] cursor-default select-none"
       >
         <span className="text-5xl sm:text-6xl font-extrabold tabular-nums leading-none text-foreground">
           {pad(value)}
         </span>
-      </button>
+      </div>
       <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
         {label}
       </span>
@@ -120,24 +113,9 @@ export function Countdown() {
 
   return (
     <div className="flex items-start gap-3 sm:gap-4 justify-center">
-      <Unit
-        value={timeLeft.days}
-        label="jours"
-        onClick={() => handleClick('jours')}
-        active={progress.includes('jours')}
-      />
-      <Unit
-        value={timeLeft.hours}
-        label="heures"
-        onClick={() => handleClick('heures')}
-        active={progress.includes('heures')}
-      />
-      <Unit
-        value={timeLeft.minutes}
-        label="minutes"
-        onClick={() => handleClick('minutes')}
-        active={progress.includes('minutes')}
-      />
+      <Unit value={timeLeft.days} label="jours" onClick={() => handleClick('jours')} />
+      <Unit value={timeLeft.hours} label="heures" onClick={() => handleClick('heures')} />
+      <Unit value={timeLeft.minutes} label="minutes" onClick={() => handleClick('minutes')} />
       <Unit value={timeLeft.seconds} label="secondes" />
     </div>
   )
