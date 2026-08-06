@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 
-const TARGET_DATE = new Date('2026-09-27T00:00:00')
+const TARGET_DATE = new Date('2026-11-27T00:00:00')
 
 // Correct sequence: heures → minutes → jours
 const SEQUENCE = ['heures', 'minutes', 'jours'] as const
