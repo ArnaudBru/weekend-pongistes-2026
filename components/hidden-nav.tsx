@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, MapPin, CalendarDays, Backpack, Images } from 'lucide-react'
+import { Home, MapPin, CalendarDays, Backpack, Users } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const ITEMS = [
@@ -10,7 +10,7 @@ const ITEMS = [
   { href: '/hidden/lieu', label: 'Lieu', icon: MapPin },
   { href: '/hidden/programme', label: 'Programme', icon: CalendarDays },
   { href: '/hidden/emporter', label: 'Emporter', icon: Backpack },
-  { href: '/hidden/galerie', label: 'Galerie', icon: Images },
+  { href: '/hidden/equipe', label: 'Équipe', icon: Users },
 ] as const
 
 export function HiddenNav() {

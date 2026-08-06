@@ -13,15 +13,22 @@ interface ScheduleDay {
 
 const SCHEDULE: ScheduleDay[] = [
   {
-    day: 'Samedi',
+    day: 'Vendredi 27',
     items: [
       { time: '?', label: 'Arrivée & installation' },
+      { time: '?', label: 'Apéro & dîner' },
+    ],
+  },
+  {
+    day: 'Samedi 28',
+    items: [
+      { time: '?', label: 'Petit-déjeuner' },
       { time: '?', label: 'Tournoi de ping-pong 🏓' },
       { time: '?', label: 'Repas du soir' },
     ],
   },
   {
-    day: 'Dimanche',
+    day: 'Dimanche 29',
     items: [
       { time: '?', label: 'Petit-déjeuner' },
       { time: '?', label: 'Temps libre' },

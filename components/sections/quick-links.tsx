@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { MapPin, CalendarDays, Backpack, Images, type LucideIcon } from 'lucide-react'
+import { MapPin, CalendarDays, Backpack, Users, type LucideIcon } from 'lucide-react'
 
 interface QuickLink {
   href: string
@@ -11,7 +11,7 @@ const LINKS: QuickLink[] = [
   { href: '/hidden/lieu', label: 'Où on loge', icon: MapPin },
   { href: '/hidden/programme', label: 'Le déroulé', icon: CalendarDays },
   { href: '/hidden/emporter', label: 'Quoi emporter', icon: Backpack },
-  { href: '/hidden/galerie', label: 'Galerie', icon: Images },
+  { href: '/hidden/equipe', label: 'Équipe', icon: Users },
 ]
 
 export function QuickLinks() {

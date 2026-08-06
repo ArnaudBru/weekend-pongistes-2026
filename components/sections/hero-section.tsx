@@ -5,7 +5,7 @@ export function HeroSection() {
         Un weekend entre potes 🏓
       </h1>
       <p className="text-base text-muted-foreground font-medium max-w-sm">
-        Dates à confirmer — on vous tient au courant dans le groupe.
+        Du vendredi 27 au dimanche 29 novembre 2026
       </p>
     </section>
   )
