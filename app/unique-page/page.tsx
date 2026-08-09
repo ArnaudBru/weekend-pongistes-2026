@@ -35,21 +35,10 @@ function TransportCard({
 }
 
 const LIEU_QUERY = encodeURIComponent('Château de Bailly, Saint-Pierre-lès-Nemours')
-const LIEU_MAPS_URL = `https://www.google.com/maps/dir/?api=1&destination=${LIEU_QUERY}`
-
-async function handleYAller() {
-  if (navigator.share) {
-    try {
-      await navigator.share({ title: 'Château de Bailly', url: LIEU_MAPS_URL })
-    } catch {
-      // utilisateur a annulé le partage — rien à faire
-    }
-  } else {
-    window.open(LIEU_MAPS_URL, '_blank', 'noopener,noreferrer')
-  }
-}
 
 function LieuCompact() {
+  const [showNav, setShowNav] = useState(false)
+
   return (
     <div className="flex flex-col gap-3 pb-6">
       <div className="rounded-xl overflow-hidden border border-[#D9DEDD]">
@@ -71,15 +60,36 @@ function LieuCompact() {
 
       <TransportCard icon={Car} label="En voiture">
         <p className="text-sm text-[#5A6668]">~1h15 depuis Paris · ~4h depuis Lyon · ~5h45 depuis Bordeaux</p>
-        <div className="flex justify-end">
+        <div className="flex flex-col gap-2.5 items-end">
           <button
             type="button"
-            onClick={handleYAller}
+            onClick={() => setShowNav((v) => !v)}
+            aria-expanded={showNav}
             className="inline-flex items-center gap-1.5 rounded-full bg-[#C98A2C] text-white text-sm font-semibold px-3.5 py-2"
           >
             <Navigation className="size-4" />
             Y aller
           </button>
+          {showNav && (
+            <div className="flex flex-wrap justify-end gap-2.5">
+              <a
+                href={`https://www.google.com/maps/dir/?api=1&destination=${LIEU_QUERY}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-[#C98A2C] text-[#C98A2C] text-sm font-semibold px-3.5 py-2 bg-white"
+              >
+                Google Maps
+              </a>
+              <a
+                href={`https://waze.com/ul?q=${LIEU_QUERY}&navigate=yes`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-[#C98A2C] text-[#C98A2C] text-sm font-semibold px-3.5 py-2 bg-white"
+              >
+                Waze
+              </a>
+            </div>
+          )}
         </div>
       </TransportCard>
     </div>
