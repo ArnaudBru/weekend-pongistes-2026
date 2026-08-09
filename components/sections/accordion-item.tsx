@@ -18,10 +18,10 @@ export function AccordionItem({ icon: Icon, label, open, onToggle, children }: A
         type="button"
         onClick={onToggle}
         aria-expanded={open}
-        className="w-full flex items-center gap-3 py-3 text-left"
+        className="w-full flex items-center gap-3 py-4 text-left"
       >
-        <Icon className="size-[17px] text-[#C98A2C] shrink-0" />
-        <span className="text-sm font-semibold text-[#35424A]">{label}</span>
+        <Icon className="size-5 text-[#C98A2C] shrink-0" />
+        <span className="text-base font-semibold text-[#35424A]">{label}</span>
         <ChevronDown
           className={`ml-auto size-4 text-[#9CA6A8] transition-transform duration-300 ${
             open ? 'rotate-180' : ''

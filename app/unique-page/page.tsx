@@ -1,42 +1,136 @@
 'use client'
 
 import { useState } from 'react'
-import { MapPin, CalendarDays, Backpack, Users, type LucideIcon } from 'lucide-react'
+import { MapPin, CalendarDays, Backpack, Users, Navigation, TrainFront, Car, type LucideIcon } from 'lucide-react'
 import { TicketHeader } from '@/components/sections/ticket-header'
 import { AccordionItem } from '@/components/sections/accordion-item'
 import type { ReactNode } from 'react'
 
-function LieuCompact() {
+function Pill({ children }: { children: ReactNode }) {
   return (
-    <div className="flex flex-col gap-2 pb-4">
+    <span className="text-sm font-medium text-[#35424A] bg-[#F1F3F3] rounded-full px-3.5 py-2">
+      {children}
+    </span>
+  )
+}
+
+function TimeTable({ rows }: { rows: [string, string][] }) {
+  return (
+    <div className="flex flex-col">
+      {rows.map(([label, time], i) => (
+        <div
+          key={label}
+          className={`flex items-baseline justify-between gap-3 py-1.5 text-sm ${
+            i < rows.length - 1 ? 'border-b border-dashed border-[#D9DEDD]' : ''
+          }`}
+        >
+          <span className="text-[#35424A]">{label}</span>
+          <span className="text-[#8B9496] tabular-nums shrink-0">{time}</span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function TransportCard({
+  icon: Icon,
+  label,
+  children,
+}: {
+  icon: LucideIcon
+  label: string
+  children: ReactNode
+}) {
+  return (
+    <div className="flex flex-col gap-1.5">
+      <div className="flex items-center gap-1.5">
+        <Icon className="size-4 text-[#C98A2C] shrink-0" />
+        <p className="text-sm font-bold text-[#35424A]">{label}</p>
+      </div>
+      {children}
+    </div>
+  )
+}
+
+const LIEU_QUERY = encodeURIComponent('Château de Bailly, Saint-Pierre-lès-Nemours')
+
+function LieuCompact() {
+  const [showNav, setShowNav] = useState(false)
+
+  return (
+    <div className="flex flex-col gap-3 pb-6">
       <div className="rounded-xl overflow-hidden border border-[#D9DEDD]">
         <iframe
           title="Carte — Château de Bailly"
           src="https://www.google.com/maps?q=Château+de+Bailly,+Saint-Pierre-lès-Nemours&output=embed"
-          className="w-full h-28 border-0"
+          className="w-full h-48 border-0"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
       </div>
-      <p className="text-xs font-semibold text-[#35424A]">Château de Bailly</p>
-      <p className="text-[11px] text-[#8B9496]">Arrivée ven. 27 nov. · Départ dim. 29 nov.</p>
+      <p className="text-base font-bold text-[#35424A]">Château de Bailly</p>
+
+      <TransportCard icon={TrainFront} label="En train">
+        <p className="text-sm text-[#5A6668]">
+          Gare Nemours – Saint-Pierre · ~50 min depuis Paris + 5 min de route (ou 15 min à vélo)
+        </p>
+      </TransportCard>
+
+      <TransportCard icon={Car} label="En voiture">
+        <p className="text-sm text-[#5A6668]">~1h15 depuis Paris · ~4h depuis Lyon · ~5h45 depuis Bordeaux</p>
+        <div className="flex flex-col gap-2.5 items-end">
+          <button
+            type="button"
+            onClick={() => setShowNav((v) => !v)}
+            aria-expanded={showNav}
+            className="inline-flex items-center gap-1.5 rounded-full bg-[#C98A2C] text-white text-sm font-semibold px-3.5 py-2"
+          >
+            <Navigation className="size-4" />
+            Y aller
+          </button>
+          {showNav && (
+            <div className="flex flex-wrap gap-2.5">
+              <a
+                href={`https://www.google.com/maps/dir/?api=1&destination=${LIEU_QUERY}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-[#C98A2C] text-[#C98A2C] text-sm font-semibold px-3.5 py-2 bg-white"
+              >
+                Google Maps
+              </a>
+              <a
+                href={`https://waze.com/ul?q=${LIEU_QUERY}&navigate=yes`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-[#C98A2C] text-[#C98A2C] text-sm font-semibold px-3.5 py-2 bg-white"
+              >
+                Waze
+              </a>
+            </div>
+          )}
+        </div>
+      </TransportCard>
     </div>
   )
 }
 
 function ProgrammeCompact() {
   const days = [
-    { label: 'Ven 27', items: 'Arrivée & installation, apéro & dîner' },
-    { label: 'Sam 28', items: 'Petit-déj, tournoi de ping-pong 🏓, repas du soir' },
-    { label: 'Dim 29', items: 'Petit-déj, temps libre, départ' },
+    { label: 'Vendredi 27', items: ['Arrivée & installation', 'Apéro & dîner'] },
+    { label: 'Samedi 28', items: ['Petit-déj', 'Tournoi de ping-pong 🏓', 'Repas du soir'] },
+    { label: 'Dimanche 29', items: ['Petit-déj', 'Temps libre', 'Départ'] },
   ]
   return (
-    <div className="flex flex-col gap-2 pb-4">
+    <div className="flex flex-col gap-5 pb-6">
       {days.map((d) => (
-        <p key={d.label} className="text-xs text-[#35424A] leading-relaxed">
-          <span className="font-semibold">{d.label} — </span>
-          <span className="text-[#5A6668]">{d.items}</span>
-        </p>
+        <div key={d.label} className="flex flex-col gap-2.5">
+          <p className="text-base font-bold text-[#35424A]">{d.label}</p>
+          <div className="flex flex-wrap gap-2.5">
+            {d.items.map((item) => (
+              <Pill key={item}>{item}</Pill>
+            ))}
+          </div>
+        </div>
       ))}
     </div>
   )
@@ -44,17 +138,21 @@ function ProgrammeCompact() {
 
 function EmporterCompact() {
   const groups = [
-    { label: 'Essentiel', items: 'sac de couchage, trousse de toilette, tenue de rechange' },
-    { label: 'Pour jouer', items: 'ta raquette, chaussures de sport, l’envie de gagner 🏓' },
-    { label: 'Optionnel', items: 'maillot de bain, jeu de société, bonne humeur' },
+    { label: 'Essentiel', items: ['Sac de couchage', 'Trousse de toilette', 'Tenue de rechange'] },
+    { label: 'Pour jouer', items: ['Ta raquette', 'Chaussures de sport', 'L’envie de gagner 🏓'] },
+    { label: 'Optionnel', items: ['Maillot de bain', 'Jeu de société', 'Bonne humeur'] },
   ]
   return (
-    <div className="flex flex-col gap-2 pb-4">
+    <div className="flex flex-col gap-5 pb-6">
       {groups.map((g) => (
-        <p key={g.label} className="text-xs text-[#35424A] leading-relaxed">
-          <span className="font-semibold">{g.label} — </span>
-          <span className="text-[#5A6668]">{g.items}</span>
-        </p>
+        <div key={g.label} className="flex flex-col gap-2.5">
+          <p className="text-base font-bold text-[#35424A]">{g.label}</p>
+          <div className="flex flex-wrap gap-2.5">
+            {g.items.map((item) => (
+              <Pill key={item}>{item}</Pill>
+            ))}
+          </div>
+        </div>
       ))}
     </div>
   )
@@ -62,7 +160,9 @@ function EmporterCompact() {
 
 function EquipeCompact() {
   return (
-    <p className="pb-4 text-xs text-[#8B9496]">La liste des participants arrive bientôt 👀</p>
+    <div className="mb-6 rounded-xl border border-dashed border-[#D9DEDD] py-10 text-center">
+      <p className="text-base text-[#8B9496]">La liste des participants arrive bientôt 👀</p>
+    </div>
   )
 }
 
@@ -87,7 +187,7 @@ export default function UniquePage() {
     <section className="flex flex-col items-center gap-6 bg-[#E9EDEE] px-6 pt-12 pb-8 min-h-screen">
       <div className="w-full max-w-sm rounded-2xl bg-white border border-[#D9DEDD] shadow-lg shadow-[#35424A]/10 overflow-hidden">
         <TicketHeader />
-        <div className="flex flex-col px-6 py-2">
+        <div className="flex flex-col px-6 py-3">
           {STOPS.map((stop) => (
             <AccordionItem
               key={stop.key}

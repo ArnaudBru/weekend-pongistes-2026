@@ -2,9 +2,6 @@ export function TicketHeader() {
   return (
     <>
       <div className="flex flex-col items-center gap-1.5 text-center px-6 pt-5 pb-4">
-        <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#9CA6A8]">
-          Billet de weekend
-        </span>
         <h1
           style={{ fontFamily: 'var(--font-slab), serif' }}
           className="text-xl font-bold text-[#35424A] tracking-tight text-balance"
