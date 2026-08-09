@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { MapPin, CalendarDays, Backpack, Users, Navigation, TrainFront, Car, type LucideIcon } from 'lucide-react'
 import { TicketHeader } from '@/components/sections/ticket-header'
 import { AccordionItem } from '@/components/sections/accordion-item'
+import { VENUE_NAME, VENUE_MAPS_QUERY } from '@/lib/venue'
 import type { ReactNode } from 'react'
 
 function Pill({ children }: { children: ReactNode }) {
@@ -34,13 +35,12 @@ function TransportCard({
   )
 }
 
-const LIEU_QUERY = encodeURIComponent('Château de Bailly, Saint-Pierre-lès-Nemours')
-const LIEU_MAPS_URL = `https://www.google.com/maps/dir/?api=1&destination=${LIEU_QUERY}`
+const LIEU_MAPS_URL = `https://www.google.com/maps/dir/?api=1&destination=${VENUE_MAPS_QUERY}`
 
 async function handleYAller() {
   if (navigator.share) {
     try {
-      await navigator.share({ title: 'Château de Bailly', url: LIEU_MAPS_URL })
+      await navigator.share({ title: VENUE_NAME, url: LIEU_MAPS_URL })
     } catch {
       // utilisateur a annulé le partage — rien à faire
     }
@@ -54,14 +54,14 @@ function LieuCompact() {
     <div className="flex flex-col gap-3 pb-6">
       <div className="rounded-xl overflow-hidden border border-[#D9DEDD]">
         <iframe
-          title="Carte — Château de Bailly"
-          src="https://www.google.com/maps?q=Château+de+Bailly,+Saint-Pierre-lès-Nemours&output=embed"
+          title={`Carte — ${VENUE_NAME}`}
+          src={`https://www.google.com/maps?q=${VENUE_MAPS_QUERY}&output=embed`}
           className="w-full h-48 border-0"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
       </div>
-      <p className="text-base font-bold text-[#35424A]">Château de Bailly</p>
+      <p className="text-base font-bold text-[#35424A]">{VENUE_NAME}</p>
 
       <TransportCard icon={TrainFront} label="En train">
         <p className="text-sm text-[#5A6668]">

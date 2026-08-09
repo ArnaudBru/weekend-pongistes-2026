@@ -1,3 +1,5 @@
+import { VENUE_NAME } from '@/lib/venue'
+
 export function TicketHeader() {
   return (
     <>
@@ -9,7 +11,7 @@ export function TicketHeader() {
           Un weekend entre potes 🏓
         </h1>
         <span className="font-mono text-xs tracking-wide tabular-nums text-[#C98A2C]">
-          → Château de Bailly · 27–29 nov. 2026
+          → {VENUE_NAME} · 27–29 nov. 2026
         </span>
       </div>
       <div
