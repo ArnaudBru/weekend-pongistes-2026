@@ -3,8 +3,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 
-// 18:00 heure de Paris (CEST, UTC+2) le 25 septembre 2026
-const TARGET_DATE = new Date('2026-09-25T16:00:00Z')
+const TARGET_DATE = new Date('2026-09-25T18:00:00+02:00') // CEST — heure de Paris
 
 // Correct sequence: heures → minutes → jours
 const SEQUENCE = ['heures', 'minutes', 'jours'] as const
