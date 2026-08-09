@@ -4,21 +4,20 @@ import { SectionHeading } from '@/components/sections/section-heading'
 export function LocationSection() {
   return (
     <section className="flex flex-col items-center gap-5 px-6 py-10">
-      <SectionHeading icon={MapPin} eyebrow="Exemple — lieu à confirmer" title="Où on loge" />
+      <SectionHeading icon={MapPin} eyebrow="Le point de chute" title="Où on loge" />
 
       <div className="w-full max-w-sm rounded-2xl bg-card p-5 flex flex-col gap-3 text-center">
-        <p className="text-sm font-bold text-foreground">Château de Vincennes</p>
-        <p className="text-sm text-muted-foreground">Avenue de Paris, 94300 Vincennes</p>
+        <p className="text-sm font-bold text-foreground">Saint-Pierre-lès-Nemours</p>
+        <p className="text-sm text-muted-foreground">77140 Saint-Pierre-lès-Nemours, Île-de-France</p>
         <p className="text-xs text-muted-foreground leading-relaxed">
-          Adresse d&apos;exemple pour tester la mise en page — le vrai lieu sera partagé dans le
-          groupe 💬
+          L&apos;adresse exacte est partagée dans le groupe 💬
         </p>
       </div>
 
       <div className="w-full max-w-sm rounded-2xl overflow-hidden border border-border">
         <iframe
-          title="Carte — Château de Vincennes"
-          src="https://www.google.com/maps?q=Château+de+Vincennes,+94300+Vincennes&output=embed"
+          title="Carte — Saint-Pierre-lès-Nemours"
+          src="https://www.google.com/maps?q=77140+Saint-Pierre-lès-Nemours&output=embed"
           className="w-full h-52 border-0"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"

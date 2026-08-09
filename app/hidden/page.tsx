@@ -1,16 +1,14 @@
 import Link from 'next/link'
-import { HeroSection } from '@/components/sections/hero-section'
-import { QuickLinks } from '@/components/sections/quick-links'
+import { TicketHero } from '@/components/sections/ticket-hero'
 
 export default function HiddenPage() {
   return (
     <>
-      <HeroSection />
-      <QuickLinks />
-      <footer className="flex justify-center py-10">
+      <TicketHero />
+      <footer className="flex justify-center py-10 bg-[#E9EDEE]">
         <Link
           href="/"
-          className="text-sm font-semibold text-primary underline underline-offset-4 hover:opacity-70 transition-opacity"
+          className="text-sm font-semibold text-[#35424A] underline underline-offset-4 opacity-75 hover:opacity-100 transition-opacity"
         >
           Retour au compte à rebours
         </Link>

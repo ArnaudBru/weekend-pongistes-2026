@@ -1,11 +1,17 @@
 import type { Metadata, Viewport } from 'next'
-import { Nunito } from 'next/font/google'
+import { Nunito, Zilla_Slab } from 'next/font/google'
 import './globals.css'
 
 const _nunito = Nunito({
   subsets: ['latin'],
   variable: '--font-sans',
   weight: ['300', '400', '600', '700', '800'],
+})
+
+const _zillaSlab = Zilla_Slab({
+  subsets: ['latin'],
+  variable: '--font-slab',
+  weight: ['600', '700'],
 })
 
 export const metadata: Metadata = {
@@ -28,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fr" className="bg-background">
+    <html lang="fr" className={`bg-background ${_zillaSlab.variable}`}>
       <body className="antialiased font-sans">
         {children}
       </body>
