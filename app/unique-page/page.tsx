@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { MapPin, CalendarDays, Backpack, Users, Navigation, TrainFront, Car, type LucideIcon } from 'lucide-react'
 import { TicketHeader } from '@/components/sections/ticket-header'
 import { AccordionItem } from '@/components/sections/accordion-item'
-import { VENUE_NAME, VENUE_MAPS_QUERY } from '@/lib/venue'
+import { VENUE_NAME, VENUE_MAPS_QUERY, VENUE_STREET, VENUE_POSTAL_CODE, VENUE_TOWN } from '@/lib/venue'
 import type { ReactNode } from 'react'
 
 function Pill({ children }: { children: ReactNode }) {
@@ -64,7 +64,12 @@ function LieuCompact() {
           referrerPolicy="no-referrer-when-downgrade"
         />
       </div>
-      <p className="text-base font-bold text-[#35424A]">{VENUE_NAME}</p>
+      <div className="flex flex-col gap-0.5">
+        <p className="text-base font-bold text-[#35424A]">{VENUE_NAME}</p>
+        <p className="text-sm text-[#8B9496]">
+          {VENUE_STREET}, {VENUE_POSTAL_CODE} {VENUE_TOWN}
+        </p>
+      </div>
 
       <TransportCard icon={TrainFront} label="En train">
         <p className="text-sm text-[#5A6668]">
