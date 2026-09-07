@@ -1,6 +1,16 @@
+import { redirect } from 'next/navigation'
 import { Countdown } from '@/components/countdown'
+import { TARGET_DATE } from '@/lib/event-date'
 
-export default function Page() {
+// This page's redirect depends on the current time, so it must be computed
+// fresh on every request rather than prerendered once at build/deploy time.
+export const dynamic = 'force-dynamic'
+
+export default async function Page() {
+  if (Date.now() >= TARGET_DATE.getTime()) {
+    redirect('/unique-page')
+  }
+
   return (
     <main className="h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden">
       {/* Warm ambient glow */}
