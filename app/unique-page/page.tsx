@@ -35,17 +35,20 @@ function TransportCard({
   )
 }
 
-const LIEU_MAPS_URL = `https://www.google.com/maps/dir/?api=1&destination=${VENUE_MAPS_QUERY}`
-
-async function handleYAller() {
-  if (navigator.share) {
-    try {
-      await navigator.share({ title: VENUE_NAME, url: LIEU_MAPS_URL })
-    } catch {
-      // utilisateur a annulé le partage — rien à faire
-    }
+function handleYAller() {
+  // Android: geo: URIs trigger the OS's own "open with" chooser across
+  // installed map apps (or open directly if only one is installed) —
+  // there's no equivalent OS-level chooser on iOS for arbitrary web
+  // links, so it falls back to opening Google Maps directly there.
+  const isAndroid = /Android/i.test(navigator.userAgent)
+  if (isAndroid) {
+    window.location.href = `geo:0,0?q=${VENUE_MAPS_QUERY}`
   } else {
-    window.open(LIEU_MAPS_URL, '_blank', 'noopener,noreferrer')
+    window.open(
+      `https://www.google.com/maps/dir/?api=1&destination=${VENUE_MAPS_QUERY}`,
+      '_blank',
+      'noopener,noreferrer',
+    )
   }
 }
 
