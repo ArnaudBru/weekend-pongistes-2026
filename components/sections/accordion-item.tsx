@@ -9,9 +9,10 @@ interface AccordionItemProps {
   open: boolean
   onToggle: () => void
   children: ReactNode
+  wip?: boolean
 }
 
-export function AccordionItem({ icon: Icon, label, open, onToggle, children }: AccordionItemProps) {
+export function AccordionItem({ icon: Icon, label, open, onToggle, children, wip }: AccordionItemProps) {
   return (
     <div className="border-b border-dashed border-[#D9DEDD] last:border-none">
       <button
@@ -22,6 +23,11 @@ export function AccordionItem({ icon: Icon, label, open, onToggle, children }: A
       >
         <Icon className="size-5 text-[#C98A2C] shrink-0" />
         <span className="text-base font-semibold text-[#35424A]">{label}</span>
+        {wip && (
+          <span className="text-[10px] font-bold uppercase tracking-wide text-[#C98A2C] bg-[#C98A2C]/10 rounded-full px-2 py-0.5">
+            WIP
+          </span>
+        )}
         <ChevronDown
           className={`ml-auto size-4 text-[#9CA6A8] transition-transform duration-300 ${
             open ? 'rotate-180' : ''
