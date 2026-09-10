@@ -15,6 +15,12 @@ function Pill({ children }: { children: ReactNode }) {
   )
 }
 
+function WipNote() {
+  return (
+    <p className="text-xs text-[#C98A2C] font-medium mb-3">🚧 Pas encore confirmé — ça va bouger</p>
+  )
+}
+
 function TransportCard({
   icon: Icon,
   label,
@@ -102,6 +108,7 @@ function ProgrammeCompact() {
   ]
   return (
     <div className="flex flex-col gap-5 pb-6">
+      <WipNote />
       {days.map((d) => (
         <div key={d.label} className="flex flex-col gap-2.5">
           <p className="text-base font-bold text-[#35424A]">{d.label}</p>
@@ -124,6 +131,7 @@ function EmporterCompact() {
   ]
   return (
     <div className="flex flex-col gap-5 pb-6">
+      <WipNote />
       {groups.map((g) => (
         <div key={g.label} className="flex flex-col gap-2.5">
           <p className="text-base font-bold text-[#35424A]">{g.label}</p>
@@ -151,13 +159,14 @@ interface Stop {
   label: string
   icon: LucideIcon
   content: ReactNode
+  wip?: boolean
 }
 
 const STOPS: Stop[] = [
   { key: 'lieu', label: 'Où on loge', icon: MapPin, content: <LieuCompact /> },
-  { key: 'programme', label: 'Le déroulé', icon: CalendarDays, content: <ProgrammeCompact /> },
-  { key: 'emporter', label: 'Quoi emporter', icon: Backpack, content: <EmporterCompact /> },
-  { key: 'equipe', label: 'Équipe', icon: Users, content: <EquipeCompact /> },
+  { key: 'programme', label: 'Le déroulé', icon: CalendarDays, content: <ProgrammeCompact />, wip: true },
+  { key: 'emporter', label: 'Quoi emporter', icon: Backpack, content: <EmporterCompact />, wip: true },
+  { key: 'equipe', label: 'Équipe', icon: Users, content: <EquipeCompact />, wip: true },
 ]
 
 export default function UniquePage() {
@@ -173,6 +182,7 @@ export default function UniquePage() {
               key={stop.key}
               icon={stop.icon}
               label={stop.label}
+              wip={stop.wip}
               open={openKey === stop.key}
               onToggle={() => setOpenKey((k) => (k === stop.key ? null : stop.key))}
             >
