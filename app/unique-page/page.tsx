@@ -117,23 +117,8 @@ function ProgrammeCompact() {
 }
 
 function EmporterCompact({ open }: { open: boolean }) {
-  const groups = [
-    { label: 'Essentiel', items: ['Sac de couchage', 'Trousse de toilette', 'Tenue de rechange'] },
-    { label: 'Pour jouer', items: ['Ta raquette', 'Chaussures de sport', 'L’envie de gagner 🏓'] },
-    { label: 'Optionnel', items: ['Maillot de bain', 'Jeu de société', 'Bonne humeur'] },
-  ]
   return (
     <div className="flex flex-col gap-5 pb-6">
-      {groups.map((g) => (
-        <div key={g.label} className="flex flex-col gap-2.5">
-          <p className="text-base font-bold text-[#35424A]">{g.label}</p>
-          <div className="flex flex-wrap gap-2.5">
-            {g.items.map((item) => (
-              <Pill key={item}>{item}</Pill>
-            ))}
-          </div>
-        </div>
-      ))}
       <div className="flex flex-col gap-1.5 items-center pt-1">
         <p className="text-sm text-[#5A6668] font-medium text-center">
           On vise ce niveau de motivation 💪
