@@ -116,7 +116,7 @@ function ProgrammeCompact() {
   )
 }
 
-function EmporterCompact() {
+function EmporterCompact({ open }: { open: boolean }) {
   const groups = [
     { label: 'Essentiel', items: ['Sac de couchage', 'Trousse de toilette', 'Tenue de rechange'] },
     { label: 'Pour jouer', items: ['Ta raquette', 'Chaussures de sport', 'L’envie de gagner 🏓'] },
@@ -134,6 +134,20 @@ function EmporterCompact() {
           </div>
         </div>
       ))}
+      <div className="flex flex-col gap-1.5 items-center pt-1">
+        <p className="text-sm text-[#5A6668] font-medium text-center">
+          On vise ce niveau de motivation 💪
+        </p>
+        <div className="rounded-xl overflow-hidden border border-[#D9DEDD] w-full max-w-[220px]">
+          {open && (
+            <img
+              src="/packing-luggage.gif"
+              alt="Un enfant tire une valise plus grande que lui sur un quai de gare"
+              className="w-full block"
+            />
+          )}
+        </div>
+      </div>
     </div>
   )
 }
@@ -150,15 +164,15 @@ interface Stop {
   key: string
   label: string
   icon: LucideIcon
-  content: ReactNode
+  content: (open: boolean) => ReactNode
   wip?: boolean
 }
 
 const STOPS: Stop[] = [
-  { key: 'lieu', label: 'Où on loge', icon: MapPin, content: <LieuCompact /> },
-  { key: 'programme', label: 'Le déroulé', icon: CalendarDays, content: <ProgrammeCompact />, wip: true },
-  { key: 'emporter', label: 'Quoi emporter', icon: Backpack, content: <EmporterCompact />, wip: true },
-  { key: 'equipe', label: 'Équipe', icon: Users, content: <EquipeCompact />, wip: true },
+  { key: 'lieu', label: 'Où on loge', icon: MapPin, content: () => <LieuCompact /> },
+  { key: 'programme', label: 'Le déroulé', icon: CalendarDays, content: () => <ProgrammeCompact />, wip: true },
+  { key: 'emporter', label: 'Quoi emporter', icon: Backpack, content: (open) => <EmporterCompact open={open} />, wip: true },
+  { key: 'equipe', label: 'Équipe', icon: Users, content: () => <EquipeCompact />, wip: true },
 ]
 
 export default function UniquePage() {
@@ -169,18 +183,21 @@ export default function UniquePage() {
       <div className="w-full max-w-sm rounded-2xl bg-white border border-[#D9DEDD] shadow-lg shadow-[#35424A]/10 overflow-hidden">
         <TicketHeader />
         <div className="flex flex-col px-6 py-3">
-          {STOPS.map((stop) => (
-            <AccordionItem
-              key={stop.key}
-              icon={stop.icon}
-              label={stop.label}
-              wip={stop.wip}
-              open={openKey === stop.key}
-              onToggle={() => setOpenKey((k) => (k === stop.key ? null : stop.key))}
-            >
-              {stop.content}
-            </AccordionItem>
-          ))}
+          {STOPS.map((stop) => {
+            const isOpen = openKey === stop.key
+            return (
+              <AccordionItem
+                key={stop.key}
+                icon={stop.icon}
+                label={stop.label}
+                wip={stop.wip}
+                open={isOpen}
+                onToggle={() => setOpenKey((k) => (k === stop.key ? null : stop.key))}
+              >
+                {stop.content(isOpen)}
+              </AccordionItem>
+            )
+          })}
         </div>
       </div>
     </section>
