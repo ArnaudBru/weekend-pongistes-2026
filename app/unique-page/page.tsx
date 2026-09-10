@@ -15,12 +15,6 @@ function Pill({ children }: { children: ReactNode }) {
   )
 }
 
-function WipNote() {
-  return (
-    <p className="text-xs text-[#C98A2C] font-medium mb-3">🚧 Pas encore confirmé — ça va bouger</p>
-  )
-}
-
 function TransportCard({
   icon: Icon,
   label,
@@ -108,7 +102,6 @@ function ProgrammeCompact() {
   ]
   return (
     <div className="flex flex-col gap-5 pb-6">
-      <WipNote />
       {days.map((d) => (
         <div key={d.label} className="flex flex-col gap-2.5">
           <p className="text-base font-bold text-[#35424A]">{d.label}</p>
@@ -131,7 +124,6 @@ function EmporterCompact() {
   ]
   return (
     <div className="flex flex-col gap-5 pb-6">
-      <WipNote />
       {groups.map((g) => (
         <div key={g.label} className="flex flex-col gap-2.5">
           <p className="text-base font-bold text-[#35424A]">{g.label}</p>
