@@ -110,6 +110,14 @@ function ProgrammeCompact() {
               <Pill key={item}>{item}</Pill>
             ))}
           </div>
+          {d.label === 'Samedi 28' && (
+            <div className="rounded-xl bg-[#C98A2C]/10 border border-[#C98A2C]/30 p-3 text-center">
+              <p className="text-sm font-semibold text-[#35424A]">
+                🎉 Le thème de la soirée est tombé : la lettre P ! Pirate, Pingouin, Pompier,
+                Prince... à vous de voir. Costume obligatoire, imagination recommandée 🅿️
+              </p>
+            </div>
+          )}
         </div>
       ))}
     </div>
