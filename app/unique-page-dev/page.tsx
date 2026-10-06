@@ -97,7 +97,7 @@ function LieuCompact() {
 function ProgrammeCompact() {
   const days = [
     { label: 'Vendredi 27', items: ['Arrivée & installation', 'Apéro & dîner'] },
-    { label: 'Samedi 28', items: ['Petit-déj', 'Tournoi de ping-pong 🏓', 'Repas du soir'] },
+    { label: 'Samedi 28', items: ['Petit-déj', 'Repas du soir'] },
     { label: 'Dimanche 29', items: ['Petit-déj', 'Temps libre', 'Départ'] },
   ]
   return (
