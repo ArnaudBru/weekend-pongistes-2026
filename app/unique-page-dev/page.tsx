@@ -94,27 +94,90 @@ function LieuCompact() {
   )
 }
 
+const EQUIPE_STYLES: Record<string, { bg: string; border: string }> = {
+  'Pamplemousses': { bg: 'bg-[#F6E7D2]', border: 'border-[#E9CDA6]' },
+  'Pianos': { bg: 'bg-[#DCE3EA]', border: 'border-[#C5D0DB]' },
+  'Porte-manteaux': { bg: 'bg-[#E3EBDD]', border: 'border-[#CBD9C2]' },
+}
+
+const EQUIPES: Record<string, string[]> = {
+  'Pamplemousses': ['Camcam', 'Zoé', 'Niako', 'Céline', 'Pica', 'Françou', 'Samsam', 'Bls'],
+  'Pianos': ['Madoo', 'Ségo', 'Gab', 'Bart', 'Soubi', 'Maino', 'Lucien', 'Tonch'],
+  'Porte-manteaux': ['Emma', 'Tatoo', 'Lulu', 'Clem', 'Charlot', 'Léon', 'Ludo'],
+}
+
+type Creneau = 'Matin' | 'Midi' | 'Après-midi' | 'Soir'
+
+interface ProgrammeItem {
+  nom: string
+  creneau: Creneau
+  equipe?: string
+}
+
+const JOURS: { label: string; items: ProgrammeItem[] }[] = [
+  {
+    label: 'Vendredi 27',
+    items: [
+      { nom: 'Arrivée & installation', creneau: 'Après-midi' },
+      { nom: 'Apéro & dîner', creneau: 'Soir', equipe: 'Pamplemousses' },
+    ],
+  },
+  {
+    label: 'Samedi 28',
+    items: [
+      { nom: 'Petit-déj', creneau: 'Matin' },
+      { nom: 'Déjeuner', creneau: 'Midi', equipe: 'Porte-manteaux' },
+      { nom: 'Atelier créatif 🎨', creneau: 'Après-midi' },
+      { nom: 'Repas du soir', creneau: 'Soir', equipe: 'Pianos' },
+      { nom: 'Murder party 🔪', creneau: 'Soir' },
+    ],
+  },
+  {
+    label: 'Dimanche 29',
+    items: [
+      { nom: 'Petit-déj', creneau: 'Matin' },
+      { nom: 'Check-out & départ 10h', creneau: 'Matin' },
+    ],
+  },
+]
+
+const CRENEAUX: Creneau[] = ['Matin', 'Midi', 'Après-midi', 'Soir']
+
 function ProgrammeCompact() {
-  const days = [
-    { label: 'Vendredi 27', items: ['Arrivée & installation', 'Apéro & dîner'] },
-    { label: 'Samedi 28', items: ['Petit-déj', 'Ça se prépare 👀', 'Repas du soir'] },
-    { label: 'Dimanche 29', items: ['Petit-déj', 'Temps libre', 'Départ'] },
-  ]
   return (
     <div className="flex flex-col gap-5 pb-6">
-      {days.map((d) => (
-        <div key={d.label} className="flex flex-col gap-2.5">
-          <p className="text-base font-bold text-[#35424A]">{d.label}</p>
-          <div className="flex flex-wrap gap-2.5">
-            {d.items.map((item) => (
-              <Pill key={item}>{item}</Pill>
-            ))}
-          </div>
-          {d.label === 'Samedi 28' && (
+      {JOURS.map((jour) => (
+        <div key={jour.label} className="flex flex-col gap-3">
+          <p className="text-base font-bold text-[#35424A]">{jour.label}</p>
+          {CRENEAUX.map((creneau) => {
+            const items = jour.items.filter((i) => i.creneau === creneau)
+            if (items.length === 0) return null
+            return (
+              <div key={creneau} className="flex gap-3">
+                <p className="w-20 shrink-0 pt-2 text-[11px] font-semibold uppercase tracking-wide text-[#8B9496]">
+                  {creneau}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {items.map((item) => (
+                    <div key={item.nom} className="flex flex-wrap items-center gap-1.5">
+                      <Pill>{item.nom}</Pill>
+                      {item.equipe && (
+                        <span
+                          className={`rounded-full border px-2.5 py-1.5 text-xs font-bold text-[#35424A] ${EQUIPE_STYLES[item.equipe].bg} ${EQUIPE_STYLES[item.equipe].border}`}
+                        >
+                          {item.equipe}
+                        </span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )
+          })}
+          {jour.label === 'Samedi 28' && (
             <div className="rounded-xl bg-[#C98A2C]/10 border border-[#C98A2C]/30 p-3 text-center">
               <p className="text-sm font-semibold text-[#35424A]">
-                🎉 Le thème de la soirée est tombé : la lettre P ! Pirate, Pingouin, Pompier,
-                Prince... à vous de voir. Costume obligatoire, imagination recommandée 🅿️
+                🎉 Thème de la soirée : lettre P 🅿️
               </p>
             </div>
           )}
@@ -147,8 +210,24 @@ function EmporterCompact({ open }: { open: boolean }) {
 
 function EquipeCompact() {
   return (
-    <div className="mb-6 rounded-xl border border-dashed border-[#D9DEDD] py-10 text-center">
-      <p className="text-base text-[#8B9496]">La liste des participants arrive bientôt 👀</p>
+    <div className="flex flex-col gap-3 pb-6">
+      {Object.entries(EQUIPES).map(([nom, membres]) => (
+        <div
+          key={nom}
+          className={`rounded-xl border p-4 ${EQUIPE_STYLES[nom].bg} ${EQUIPE_STYLES[nom].border}`}
+        >
+          <p className="text-sm font-bold text-[#35424A]">
+            Équipe {nom} <span className="font-normal text-[#8B9496]">· {membres.length} personnes</span>
+          </p>
+          <ul className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1">
+            {membres.map((m) => (
+              <li key={m} className="text-sm text-[#5A6668]">
+                {m}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
   )
 }
@@ -163,9 +242,9 @@ interface Stop {
 
 const STOPS: Stop[] = [
   { key: 'lieu', label: 'Où on loge', icon: MapPin, content: () => <LieuCompact /> },
-  { key: 'programme', label: 'Le déroulé', icon: CalendarDays, content: () => <ProgrammeCompact />, wip: true },
+  { key: 'programme', label: 'Le déroulé', icon: CalendarDays, content: () => <ProgrammeCompact /> },
   { key: 'emporter', label: 'Quoi emporter', icon: Backpack, content: (open) => <EmporterCompact open={open} />, wip: true },
-  { key: 'equipe', label: 'Équipe', icon: Users, content: () => <EquipeCompact />, wip: true },
+  { key: 'equipe', label: 'Équipe', icon: Users, content: () => <EquipeCompact /> },
 ]
 
 export default function UniquePage() {
