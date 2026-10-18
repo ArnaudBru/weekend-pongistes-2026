@@ -159,16 +159,23 @@ function ProgrammeCompact() {
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {items.map((item) => (
-                    <div key={item.nom} className="flex flex-wrap items-center gap-1.5">
-                      <Pill>{item.nom}</Pill>
-                      {item.equipe && (
+                    item.equipe ? (
+                      <span
+                        key={item.nom}
+                        className={`inline-flex items-stretch overflow-hidden rounded-full border ${EQUIPE_STYLES[item.equipe].border}`}
+                      >
+                        <span className="bg-[#F1F3F3] py-2 pl-3.5 pr-3 text-sm font-medium text-[#35424A]">
+                          {item.nom}
+                        </span>
                         <span
-                          className={`rounded-full border px-2.5 py-1.5 text-xs font-bold text-[#35424A] ${EQUIPE_STYLES[item.equipe].bg} ${EQUIPE_STYLES[item.equipe].border}`}
+                          className={`flex items-center py-2 pl-3 pr-3.5 text-xs font-bold text-[#35424A] ${EQUIPE_STYLES[item.equipe].bg}`}
                         >
                           {item.equipe}
                         </span>
-                      )}
-                    </div>
+                      </span>
+                    ) : (
+                      <Pill key={item.nom}>{item.nom}</Pill>
+                    )
                   ))}
                 </div>
               </div>
