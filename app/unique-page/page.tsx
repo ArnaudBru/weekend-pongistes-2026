@@ -210,7 +210,7 @@ function EmporterCompact() {
           <Pill key={item}>{item}</Pill>
         ))}
       </div>
-      <p className="text-sm text-[#5A6668]">🛏️ Draps et serviettes fournis sur place</p>
+      <p className="pl-3.5 text-sm text-[#5A6668]">🛏️ Draps et serviettes fournis sur place</p>
     </div>
   )
 }
