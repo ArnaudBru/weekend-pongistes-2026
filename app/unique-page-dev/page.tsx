@@ -196,8 +196,8 @@ function ProgrammeCompact() {
 }
 
 const A_EMPORTER = [
-  '✂️ Ta paire de ciseaux',
-  '🎲 Tes jeux de société',
+  '✂️ Une paire de ciseaux par personne',
+  '🎲 Des gaaaames',
   '🅿️ Ton meilleur Péguisement',
   '🌲 Ton kit 2 jours à la campagne',
 ]
