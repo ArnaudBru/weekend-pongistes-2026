@@ -204,10 +204,13 @@ const A_EMPORTER = [
 
 function EmporterCompact() {
   return (
-    <div className="flex flex-wrap gap-2 pb-6">
-      {A_EMPORTER.map((item) => (
-        <Pill key={item}>{item}</Pill>
-      ))}
+    <div className="flex flex-col gap-3 pb-6">
+      <div className="flex flex-wrap gap-2">
+        {A_EMPORTER.map((item) => (
+          <Pill key={item}>{item}</Pill>
+        ))}
+      </div>
+      <p className="text-sm text-[#5A6668]">🛏️ Draps et serviettes fournis sur place</p>
     </div>
   )
 }
