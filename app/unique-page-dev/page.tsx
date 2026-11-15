@@ -197,8 +197,8 @@ function ProgrammeCompact() {
 
 const A_EMPORTER = [
   '✂️ Une paire de ciseaux par personne',
-  '🎲 Des gaaaames',
   '🅿️ Ton meilleur Péguisement',
+  '🎲 Des gaaaames',
   '🌲 Le nécessaire pour deux jours au vert',
 ]
 
