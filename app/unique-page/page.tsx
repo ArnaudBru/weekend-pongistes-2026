@@ -199,6 +199,7 @@ const A_EMPORTER = [
   '✂️ Une paire de ciseaux par personne',
   '🧙 Ton meilleur Péguisement',
   '🎲 Des gaaaames',
+  '👶 Un lit bébé pour les bébés',
   '🌲 Le nécessaire pour deux jours au vert',
 ]
 
