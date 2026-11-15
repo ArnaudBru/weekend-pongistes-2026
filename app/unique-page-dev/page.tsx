@@ -255,7 +255,7 @@ interface Stop {
 const STOPS: Stop[] = [
   { key: 'lieu', label: 'Où on loge', icon: MapPin, content: () => <LieuCompact /> },
   { key: 'programme', label: 'Le déroulé', icon: CalendarDays, content: () => <ProgrammeCompact /> },
-  { key: 'emporter', label: 'Quoi emporter', icon: Backpack, content: () => <EmporterCompact />, wip: true },
+  { key: 'emporter', label: 'Quoi emporter', icon: Backpack, content: () => <EmporterCompact /> },
   { key: 'equipe', label: 'Équipe', icon: Users, content: () => <EquipeCompact /> },
 ]
 
