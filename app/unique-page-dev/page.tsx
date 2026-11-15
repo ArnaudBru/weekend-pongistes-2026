@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { MapPin, CalendarDays, Backpack, Users, Navigation, TrainFront, Car, Scissors, Dices, Shirt, TreePine, type LucideIcon } from 'lucide-react'
+import { MapPin, CalendarDays, Backpack, Users, Navigation, TrainFront, Car, type LucideIcon } from 'lucide-react'
 import { TicketHeader } from '@/components/sections/ticket-header'
 import { AccordionItem } from '@/components/sections/accordion-item'
 import { VENUE_NAME, VENUE_MAPS_QUERY, VENUE_STREET, VENUE_POSTAL_CODE, VENUE_TOWN } from '@/lib/venue'
@@ -195,28 +195,20 @@ function ProgrammeCompact() {
   )
 }
 
-const A_EMPORTER: { icon: LucideIcon; label: string; detail: string }[] = [
-  { icon: Scissors, label: 'Ciseaux', detail: 'Une paire par personne' },
-  { icon: Dices, label: 'Jeux de société', detail: 'Pour animer les soirées' },
-  { icon: Shirt, label: 'Déguisement en P', detail: 'Pirate, pingouin, pompier… ou autre' },
-  { icon: TreePine, label: 'Le kit campagne', detail: 'Tout le nécessaire pour 2 jours au vert' },
+const A_EMPORTER = [
+  '✂️ Ta paire de ciseaux',
+  '🎲 Tes jeux de société',
+  '🅿️ Ton meilleur Péguisement',
+  '🌲 Ton kit 2 jours à la campagne',
 ]
 
 function EmporterCompact() {
   return (
-    <ul className="flex flex-col gap-2.5 pb-6">
-      {A_EMPORTER.map(({ icon: Icon, label, detail }) => (
-        <li key={label} className="flex items-center gap-3 rounded-xl bg-[#F1F3F3] p-3">
-          <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-[#C98A2C]">
-            <Icon className="size-5 text-white" />
-          </span>
-          <div className="flex flex-col">
-            <p className="text-base font-bold text-[#35424A]">{label}</p>
-            <p className="text-sm text-[#5A6668]">{detail}</p>
-          </div>
-        </li>
+    <div className="flex flex-wrap gap-2 pb-6">
+      {A_EMPORTER.map((item) => (
+        <Pill key={item}>{item}</Pill>
       ))}
-    </ul>
+    </div>
   )
 }
 
