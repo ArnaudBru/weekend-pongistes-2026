@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { MapPin, CalendarDays, Backpack, Users, Navigation, TrainFront, Car, type LucideIcon } from 'lucide-react'
+import { MapPin, CalendarDays, Backpack, Users, Navigation, TrainFront, Car, BedDouble, type LucideIcon } from 'lucide-react'
 import { TicketHeader } from '@/components/sections/ticket-header'
 import { AccordionItem } from '@/components/sections/accordion-item'
 import { VENUE_NAME, VENUE_MAPS_QUERY, VENUE_STREET, VENUE_POSTAL_CODE, VENUE_TOWN } from '@/lib/venue'
@@ -204,10 +204,15 @@ const A_EMPORTER = [
 
 function EmporterCompact() {
   return (
-    <div className="flex flex-wrap gap-2 pb-6">
-      {A_EMPORTER.map((item) => (
-        <Pill key={item}>{item}</Pill>
-      ))}
+    <div className="flex flex-col gap-3 pb-6">
+      <div className="flex flex-wrap gap-2">
+        {A_EMPORTER.map((item) => (
+          <Pill key={item}>{item}</Pill>
+        ))}
+      </div>
+      <TransportCard icon={BedDouble} label="Sur place">
+        <p className="text-sm text-[#5A6668]">Draps et serviettes fournis</p>
+      </TransportCard>
     </div>
   )
 }
