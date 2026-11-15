@@ -195,42 +195,28 @@ function ProgrammeCompact() {
   )
 }
 
-const A_EMPORTER: { icon: LucideIcon; label: string; detail?: string }[] = [
-  { icon: Scissors, label: 'Une paire de ciseaux', detail: 'par personne' },
-  { icon: Dices, label: 'Des jeux de société' },
-  { icon: Shirt, label: 'Un déguisement en P' },
-  { icon: TreePine, label: 'Le nécessaire pour 2 jours à la campagne' },
+const A_EMPORTER: { icon: LucideIcon; label: string; detail: string }[] = [
+  { icon: Scissors, label: 'Ciseaux', detail: 'Une paire par personne' },
+  { icon: Dices, label: 'Jeux de société', detail: 'Pour animer les soirées' },
+  { icon: Shirt, label: 'Déguisement en P', detail: 'Pirate, pingouin, pompier… ou autre' },
+  { icon: TreePine, label: 'Le kit campagne', detail: 'Tout le nécessaire pour 2 jours au vert' },
 ]
 
-function EmporterCompact({ open }: { open: boolean }) {
+function EmporterCompact() {
   return (
-    <div className="flex flex-col gap-5 pb-6">
-      <ul className="flex flex-col gap-3">
-        {A_EMPORTER.map(({ icon: Icon, label, detail }) => (
-          <li key={label} className="flex items-start gap-3">
-            <Icon className="mt-0.5 size-4 shrink-0 text-[#C98A2C]" />
-            <p className="text-sm font-medium text-[#35424A]">
-              {label}
-              {detail && <span className="font-normal text-[#8B9496]"> · {detail}</span>}
-            </p>
-          </li>
-        ))}
-      </ul>
-      <div className="flex flex-col gap-1.5 items-center pt-1">
-        <p className="text-sm text-[#5A6668] font-medium text-center">
-          On vise ce niveau de motivation 💪
-        </p>
-        <div className="rounded-xl overflow-hidden border border-[#D9DEDD] w-full max-w-[220px]">
-          {open && (
-            <img
-              src="/packing-luggage.gif"
-              alt="Un enfant tire une valise plus grande que lui sur un quai de gare"
-              className="w-full block"
-            />
-          )}
-        </div>
-      </div>
-    </div>
+    <ul className="flex flex-col gap-2.5 pb-6">
+      {A_EMPORTER.map(({ icon: Icon, label, detail }) => (
+        <li key={label} className="flex items-center gap-3 rounded-xl bg-[#F1F3F3] p-3">
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-[#C98A2C]">
+            <Icon className="size-5 text-white" />
+          </span>
+          <div className="flex flex-col">
+            <p className="text-base font-bold text-[#35424A]">{label}</p>
+            <p className="text-sm text-[#5A6668]">{detail}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
   )
 }
 
@@ -269,7 +255,7 @@ interface Stop {
 const STOPS: Stop[] = [
   { key: 'lieu', label: 'Où on loge', icon: MapPin, content: () => <LieuCompact /> },
   { key: 'programme', label: 'Le déroulé', icon: CalendarDays, content: () => <ProgrammeCompact /> },
-  { key: 'emporter', label: 'Quoi emporter', icon: Backpack, content: (open) => <EmporterCompact open={open} />, wip: true },
+  { key: 'emporter', label: 'Quoi emporter', icon: Backpack, content: () => <EmporterCompact />, wip: true },
   { key: 'equipe', label: 'Équipe', icon: Users, content: () => <EquipeCompact /> },
 ]
 
