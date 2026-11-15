@@ -118,7 +118,7 @@ const JOURS: { label: string; items: ProgrammeItem[] }[] = [
   {
     label: 'Vendredi 27',
     items: [
-      { nom: 'Arrivée & installation', creneau: 'Après-midi' },
+      { nom: 'Arrivée dès 14h', creneau: 'Après-midi' },
       { nom: 'Apéro & dîner', creneau: 'Soir', equipe: 'Pamplemousses' },
     ],
   },
@@ -136,7 +136,8 @@ const JOURS: { label: string; items: ProgrammeItem[] }[] = [
     label: 'Dimanche 29',
     items: [
       { nom: 'Petit-déj', creneau: 'Matin' },
-      { nom: 'Check-out & départ 10h', creneau: 'Matin' },
+      { nom: 'Check-out 10h', creneau: 'Matin' },
+      { nom: "Départ jusqu'à 14h", creneau: 'Après-midi' },
     ],
   },
 ]
