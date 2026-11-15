@@ -195,23 +195,19 @@ function ProgrammeCompact() {
   )
 }
 
-function EmporterCompact({ open }: { open: boolean }) {
+const A_EMPORTER = [
+  '✂️ Une paire de ciseaux par personne',
+  '🅿️ Ton meilleur Péguisement',
+  '🎲 Des gaaaames',
+  '🌲 Le nécessaire pour deux jours au vert',
+]
+
+function EmporterCompact() {
   return (
-    <div className="flex flex-col gap-5 pb-6">
-      <div className="flex flex-col gap-1.5 items-center pt-1">
-        <p className="text-sm text-[#5A6668] font-medium text-center">
-          On vise ce niveau de motivation 💪
-        </p>
-        <div className="rounded-xl overflow-hidden border border-[#D9DEDD] w-full max-w-[220px]">
-          {open && (
-            <img
-              src="/packing-luggage.gif"
-              alt="Un enfant tire une valise plus grande que lui sur un quai de gare"
-              className="w-full block"
-            />
-          )}
-        </div>
-      </div>
+    <div className="flex flex-wrap gap-2 pb-6">
+      {A_EMPORTER.map((item) => (
+        <Pill key={item}>{item}</Pill>
+      ))}
     </div>
   )
 }
@@ -251,7 +247,7 @@ interface Stop {
 const STOPS: Stop[] = [
   { key: 'lieu', label: 'Où on loge', icon: MapPin, content: () => <LieuCompact /> },
   { key: 'programme', label: 'Le déroulé', icon: CalendarDays, content: () => <ProgrammeCompact /> },
-  { key: 'emporter', label: 'Quoi emporter', icon: Backpack, content: (open) => <EmporterCompact open={open} />, wip: true },
+  { key: 'emporter', label: 'Quoi emporter', icon: Backpack, content: () => <EmporterCompact /> },
   { key: 'equipe', label: 'Équipe', icon: Users, content: () => <EquipeCompact /> },
 ]
 
